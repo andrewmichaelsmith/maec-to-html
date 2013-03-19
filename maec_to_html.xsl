@@ -211,24 +211,25 @@ me@andrewmichaelsmith.com
                     <b>Behavior</b>
                 </div>
      
-                    <xsl:if test="maec:Description">
-                             <h3>Description</h3><br/>
-                             <div id="section">
-                                 <xsl:for-each select="maec:Description">
-                                     <xsl:call-template name="processDescription"/>
-                                 </xsl:for-each>
-                             </div>
-                         </xsl:if>
+                    
      
                  <table id="hor-minimalist-a" width="100%">
                      <thead>
                          <tr>
-                             <th scope="col">Behaviour Description</th>
+                             <th scope="col">Behavior Description</th>
                              <th scope="col">Discovery Method</th>
                          </tr>
                      </thead>
                      <TR>
-
+                        <td>
+                            <xsl:if test="maec:Description">
+                            <xsl:for-each select="maec:Description">
+                                    <xsl:for-each select="maec:Text">
+                                        <xsl:value-of select="."/>
+                                    </xsl:for-each>
+                                </xsl:for-each>
+                           </xsl:if>
+                        </td>
 
                      </TR>
                  </table>
