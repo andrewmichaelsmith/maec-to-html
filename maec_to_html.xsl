@@ -5,6 +5,9 @@ Compatible with MAEC Schema v1.1 output
 
 Updated 8/19/2011
 ikirillov@mitre.org
+
+Modified 19/03/2013
+me@andrewmichaelsmith.com
 -->
 
 
@@ -173,23 +176,7 @@ ikirillov@mitre.org
                 <head/>
                 <body>
                     <div id="wrapper">
-                        <div id="header"> 
-                            <H1>MAEC Output</H1>
-                            <table id="hor-minimalist-a" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Schema Version</th>
-                                        <th scope="col">Generated From</th>
-                                        <th scope="col">Generation Date</th>
-                                    </tr>
-                                </thead>
-                                <TR>
-                                    <TD><xsl:value-of select="//maec:MAEC_Bundle/@schema_version"/></TD>
-                                    <TD><xsl:value-of select="tokenize(document-uri(.), '/')[last()]"/></TD>
-                                    <TD><xsl:value-of select="current-date()"/></TD>
-                                </TR>   
-                            </table>
-                        </div>
+                       
                         <xsl:if test="//maec:Analyses">
                             <h2><a name="analysis">Analyses</a></h2>
                             <div id="content">
@@ -202,6 +189,12 @@ ikirillov@mitre.org
                                 <xsl:call-template name="processActions"/>
                             </div>
                         </xsl:if>
+                        <xsl:if test="//maec:Behaviors">
+                            <h2><a name="Behaviors">Behaviors</a></h2>
+                            <div id="content">
+                                <xsl:call-template name="processBehaviors"/>
+                            </div>
+                        </xsl:if>
                         <h2><a name="objects">Objects</a></h2>
                         <div id="content">
                             <xsl:call-template name="processObjects"/>
@@ -212,9 +205,40 @@ ikirillov@mitre.org
             </html>
     </xsl:template>
     
+    <xsl:template name="processBehaviors">
+            <xsl:for-each select="//maec:Behaviors/maec:Behavior">
+                <div id="beBehavior">
+                    <b>Behavior</b>
+                </div>
+     
+                    <xsl:if test="maec:Description">
+                             <h3>Description</h3><br/>
+                             <div id="section">
+                                 <xsl:for-each select="maec:Description">
+                                     <xsl:call-template name="processDescription"/>
+                                 </xsl:for-each>
+                             </div>
+                         </xsl:if>
+     
+                 <table id="hor-minimalist-a" width="100%">
+                     <thead>
+                         <tr>
+                             <th scope="col">Behaviour Description</th>
+                             <th scope="col">Discovery Method</th>
+                         </tr>
+                     </thead>
+                     <TR>
+
+
+                     </TR>
+                 </table>
+                
+            </xsl:for-each>
+    </xsl:template>
+
     <xsl:template name="processAnalyses">
             <xsl:for-each select="//maec:Analyses/maec:Analysis">
-                <xsl:variable name="imgVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
+            <!--<xsl:variable name="imgVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
                 <div id="anaHeader" style="cursor: pointer;" onclick="toggleDiv('{concat(@id, '_Content')}', '{$imgVar}')">
                     <span id="{$imgVar}" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span>
                     <b>Analysis</b>
@@ -366,8 +390,8 @@ ikirillov@mitre.org
                          </xsl:if>
                      </div>
                  </xsl:if>
-                 
-                 <xsl:if test="maec:Tools_Used">
+                 -->
+                 <!--<xsl:if test="maec:Tools_Used">
                      <h3>Tools Used</h3><br/>
                          <xsl:for-each select="maec:Tools_Used/maec:Tool">
                              <b>Tool</b>
@@ -403,7 +427,7 @@ ikirillov@mitre.org
                              </table> <br/>
                              </div>
                          </xsl:for-each>
-                 </xsl:if>
+                 </xsl:if>-->
                  
                  <xsl:if test="maec:Notes">
                      <h3>Notes</h3><br/>
@@ -424,7 +448,6 @@ ikirillov@mitre.org
                             <xsl:call-template name="processObject"/><br/>
                         </xsl:for-each>
                     </xsl:for-each>
-                </div>
             </xsl:for-each>
     </xsl:template>
     
