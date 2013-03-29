@@ -156,7 +156,10 @@ me@andrewmichaelsmith.com
                     padding: 5px;
                     }
                 </STYLE>
-                
+                <link rel="stylesheet" type="text/css" href="https://code.google.com/p/google-code-prettify/source/browse/trunk/src/prettify.css">
+                </link>
+                <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+
                 <SCRIPT type="text/javascript">
                     //Collapse functionality
                     function toggleDiv(divid, spanID){
@@ -177,6 +180,13 @@ me@andrewmichaelsmith.com
                 <body>
                     <div id="wrapper">
                        
+                        <xsl:if test="//maec:Behaviors">
+                            <h2><a name="Behaviors">Behaviors</a></h2>
+                            <div id="content">
+                                <xsl:call-template name="processBehaviors"/>
+                            </div>
+                        </xsl:if>
+
                         <xsl:if test="//maec:Analyses">
                             <h2><a name="analysis">Analyses</a></h2>
                             <div id="content">
@@ -189,12 +199,7 @@ me@andrewmichaelsmith.com
                                 <xsl:call-template name="processActions"/>
                             </div>
                         </xsl:if>
-                        <xsl:if test="//maec:Behaviors">
-                            <h2><a name="Behaviors">Behaviors</a></h2>
-                            <div id="content">
-                                <xsl:call-template name="processBehaviors"/>
-                            </div>
-                        </xsl:if>
+                       
                         <h2><a name="objects">Objects</a></h2>
                         <div id="content">
                             <xsl:call-template name="processObjects"/>
@@ -237,6 +242,7 @@ me@andrewmichaelsmith.com
 
     <xsl:template name="processAnalyses">
             <xsl:for-each select="//maec:Analyses/maec:Analysis">
+            <!-- Commented out because this is mostly 'method' and 'start time' etc. informatiom which will will supply elsewhere -->
             <!--<xsl:variable name="imgVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
                 <div id="anaHeader" style="cursor: pointer;" onclick="toggleDiv('{concat(@id, '_Content')}', '{$imgVar}')">
                     <span id="{$imgVar}" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span>
@@ -4110,12 +4116,16 @@ me@andrewmichaelsmith.com
             </xsl:if>
             <xsl:if test="maec:Code_Snippet/maec:Code_Segment">
                 <div id="inner_container">
-                    <xsl:value-of select="maec:Code_Snippet/maec:Code_Segment"/>
+                     <code class="prettyprint">
+                        <xsl:value-of select="maec:Code_Snippet/maec:Code_Segment"/>
+                    </code>
                 </div> <br/>
             </xsl:if>
             <xsl:if test="maec:Code_Snippet/maec:Code_Segment_XOR">
                 <div id="inner_container">
-                    <xsl:value-of select="maec:Code_Snippet/maec:Code_Segment_XOR"/>
+                    <code class="prettyprint">
+                         <xsl:value-of select="maec:Code_Snippet/maec:Code_Segment_XOR"/>
+                    </code>
                 </div> <br/>
             </xsl:if>
         </xsl:for-each>
