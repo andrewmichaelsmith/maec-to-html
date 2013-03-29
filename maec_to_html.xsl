@@ -210,10 +210,7 @@ me@andrewmichaelsmith.com
                 <div id="beBehavior">
                     <b>Behavior</b>
                 </div>
-     
-                    
-     
-                 <table id="hor-minimalist-a" width="100%">
+                <table id="hor-minimalist-a" width="100%">
                      <thead>
                          <tr>
                              <th scope="col">Behavior Description</th>
@@ -230,6 +227,16 @@ me@andrewmichaelsmith.com
                                 </xsl:for-each>
                            </xsl:if>
                         </td>
+                        <td>
+                            <xsl:if test="maec:Discovery_Method">
+                            <xsl:for-each select="maec:Discovery_Method">
+                                    <xsl:for-each select="maec:Text">
+                                        <xsl:value-of select="."/>
+                                    </xsl:for-each>
+                                </xsl:for-each>
+                           </xsl:if>
+                        </td>
+
 
                      </TR>
                  </table>
