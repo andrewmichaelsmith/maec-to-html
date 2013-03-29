@@ -193,18 +193,20 @@ me@andrewmichaelsmith.com
                                  <xsl:call-template name="processAnalyses"/>
                             </div>
                         </xsl:if>
+                        <!-- TODO: Do we use actions? -->
                         <xsl:if test="//maec:Pools/maec:Action_Collection_Pool">
                             <h2><a name="actions">Actions</a></h2>
                             <div id="content">
                                 <xsl:call-template name="processActions"/>
                             </div>
                         </xsl:if>
-                       
+                       <!-- Disabled - all objects appear to have an associated analysis which displays them so there is no need to display them all a second time
                         <h2><a name="objects">Objects</a></h2>
                         <div id="content">
                             <xsl:call-template name="processObjects"/>
                             <xsl:call-template name="processAllObjects"/>
                         </div>
+                         -->
                    </div>
                 </body>
             </html>
@@ -444,7 +446,6 @@ me@andrewmichaelsmith.com
                  </xsl:if>
                  
                      
-                 <h3>Subject(s)</h3><br/>
                     <xsl:for-each select="maec:Subject">
                         <xsl:for-each select="key('objectID',maec:Object_Reference/@object_id)">
                             <xsl:call-template name="processObject"/><br/>
@@ -1852,6 +1853,7 @@ me@andrewmichaelsmith.com
         </xsl:if>
     </xsl:template>
     
+
     <xsl:template name="processProcessObjects">
         <xsl:if test="key('objectID',//maec:Affected_Object/maec:Object_Reference/@object_id)/@type='Process'">
             <div id="procObjHeader" style="cursor: pointer;" onclick="toggleDiv('procObjContent', 'procObjSpan')">
