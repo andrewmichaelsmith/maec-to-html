@@ -207,41 +207,32 @@ me@andrewmichaelsmith.com
     
     <xsl:template name="processBehaviors">
             <xsl:for-each select="//maec:Behaviors/maec:Behavior">
-                <div id="beBehavior">
-                    <b>Behavior</b>
-                </div>
-                <table id="hor-minimalist-a" width="100%">
-                     <thead>
-                         <tr>
-                             <th scope="col">Behavior Description</th>
-                             <th scope="col">Discovery Method</th>
-                         </tr>
-                     </thead>
-                     <TR>
-                        <td>
-                            <xsl:if test="maec:Description">
-                            <xsl:for-each select="maec:Description">
-                                    <xsl:for-each select="maec:Text">
-                                        <xsl:value-of select="."/>
-                                    </xsl:for-each>
-                                </xsl:for-each>
-                           </xsl:if>
-                        </td>
-                        <td>
-                            <xsl:if test="maec:Discovery_Method">
-                            <xsl:for-each select="maec:Discovery_Method">
-                                    <xsl:for-each select="maec:Text">
-                                        <xsl:value-of select="."/>
-                                    </xsl:for-each>
-                                </xsl:for-each>
-                           </xsl:if>
-                        </td>
-
-
-                     </TR>
-                 </table>
-                
-            </xsl:for-each>
+               
+               <xsl:if test="maec:Description">
+                    <xsl:for-each select="maec:Description">
+                        <xsl:for-each select="maec:Text">
+                            <p><b><xsl:value-of select="."/></b></p>
+                        </xsl:for-each>
+                    </xsl:for-each>
+               </xsl:if>
+               <xsl:if test="maec:Purpose">
+                <ul>
+                <xsl:for-each select="maec:Purpose">
+                    <xsl:for-each select="maec:Attempted_Vulnerability_Exploit">
+                        <xsl:for-each select="maec:Known_Exploit">
+                                <xsl:if test="@cve_id">
+                                    <li>Known Vunlerability Exploit: 
+                                        <a target="_blank" href="http://web.nvd.nist.gov/view/vuln/detail?vulnId={@cve_id}">
+                                            <xsl:value-of select="@cve_id"/>
+                                        </a>
+                                    </li>
+                                </xsl:if>
+                            </xsl:for-each>
+                        </xsl:for-each>
+                   </xsl:for-each>
+                </ul>
+               </xsl:if>
+        </xsl:for-each>
     </xsl:template>
 
     <xsl:template name="processAnalyses">
