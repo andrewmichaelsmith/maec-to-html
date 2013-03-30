@@ -22,7 +22,7 @@ me@andrewmichaelsmith.com
     <xsl:template match="/">
             <html>
                 <title>MAEC Report</title>
-                <STYLE type="text/css">
+                <!--<STYLE type="text/css">
                     /* define table skin */
                     table.grid {
                     margin: 0px;
@@ -155,27 +155,9 @@ me@andrewmichaelsmith.com
                     border-right: 1px solid #ccc;
                     padding: 5px;
                     }
-                </STYLE>
-                <link rel="stylesheet" type="text/css" href="https://code.google.com/p/google-code-prettify/source/browse/trunk/src/prettify.css">
-                </link>
-                <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
-
-                <SCRIPT type="text/javascript">
-                    //Collapse functionality
-                    function toggleDiv(divid, spanID){
-                    if(document.getElementById(divid).style.display == 'none'){
-                    document.getElementById(divid).style.display = 'block';
-                    if(spanID){
-                    document.getElementById(spanID).innerText = "-";
-                    }
-                    }else{
-                    document.getElementById(divid).style.display = 'none';
-                    if(spanID){
-                    document.getElementById(spanID).innerText = "+";
-                    }
-                    }
-                    }
-                </SCRIPT>
+                </STYLE>-->
+               
+              
                 <head/>
                 <body>
                     <div id="wrapper">
@@ -247,7 +229,7 @@ me@andrewmichaelsmith.com
             <!-- Commented out because this is mostly 'method' and 'start time' etc. informatiom which will will supply elsewhere -->
             <!--<xsl:variable name="imgVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
                 <div id="anaHeader" style="cursor: pointer;" onclick="toggleDiv('{concat(@id, '_Content')}', '{$imgVar}')">
-                    <span id="{$imgVar}" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span>
+                    
                     <b>Analysis</b>
                 </div>
                 <div id="{concat(@id, '_Content')}" style="overflow:hidden; display:block;">
@@ -461,7 +443,7 @@ me@andrewmichaelsmith.com
             <xsl:for-each select="//maec:Actions">
                 <xsl:variable name="imgVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
                 <div id="actionsHeader" style="cursor: pointer;" onclick="toggleDiv('{concat(replace(@name,' ','_'),'_Header')}', '{$imgVar}')">
-                    <span id="{$imgVar}" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> <b>All Actions</b>
+                     <b>All Actions</b>
                 </div>
                 <div id="{concat(replace(@name,' ','_'),'_Header')}" style="overflow:hidden; display:block;">
                     <TABLE class="grid tablesorter" cellspacing="0" style="width: auto;">
@@ -511,7 +493,7 @@ me@andrewmichaelsmith.com
             <xsl:for-each select="//maec:Pools/maec:Action_Collection_Pool/maec:Action_Collection">
                 <xsl:variable name="imgVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
                 <div id="actionHeader" style="cursor: pointer;" onclick="toggleDiv('{concat(replace(@name,' ','_'),'_Header')}', '{$imgVar}')">
-                    <span id="{$imgVar}" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> <b><xsl:value-of select="@name"/></b>
+                     <b><xsl:value-of select="@name"/></b>
                            </div>
                            <div id="{concat(replace(@name,' ','_'),'_Header')}" style="overflow:hidden; display:block;">
                                 <TABLE class="grid tablesorter" cellspacing="0" style="width: auto;">
@@ -565,7 +547,7 @@ me@andrewmichaelsmith.com
                 <xsl:variable name="contentVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
                 <xsl:variable name="imgVar" select="generate-id()"/>
                 <div id="fileObjAtt" style="cursor: pointer;" onclick="toggleDiv('{$contentVar}','{$imgVar}')">
-                    <span id="{$imgVar}" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> <xsl:value-of select="@action_name"/>
+                     <xsl:value-of select="@action_name"/>
                 </div>
                 <div id="{$contentVar}" style="overflow:hidden; display:block; padding:0px 7px;">
                     <xsl:if test="maec:Description">
@@ -686,7 +668,7 @@ me@andrewmichaelsmith.com
                 <xsl:variable name="contentVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
                 <xsl:variable name="imgVar" select="generate-id()"/>
                 <div id="fileObjAtt" style="cursor: pointer;" onclick="toggleDiv('{$contentVar}','{$imgVar}')">
-                    <span id="{$imgVar}" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> <xsl:value-of select="@action_name"/>
+                     <xsl:value-of select="@action_name"/>
                 </div>
                 <div id="{$contentVar}" style="overflow:hidden; display:block; padding:0px 7px;">
                     <xsl:if test="maec:Description">
@@ -1488,7 +1470,7 @@ me@andrewmichaelsmith.com
     
     <xsl:template name="processAllObjects">
         <div id="allObjHeader" style="cursor: pointer;" onclick="toggleDiv('allObjContent', 'allObjSpan')">
-            <span id="allObjSpan" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> <b>All Objects</b>
+             <b>All Objects</b>
         </div>
         <div id="allObjContent" style="overflow:hidden; display:block;">
             <TABLE class="grid tablesorter" cellspacing="0" style="width: auto;">
@@ -1527,7 +1509,7 @@ me@andrewmichaelsmith.com
     <xsl:template name="processFileObjects">
         <xsl:if test="key('objectID',//maec:Affected_Object/maec:Object_Reference/@object_id)/@type='File' or key('objectID',//maec:Affected_Object/maec:Object_Reference/@object_id)/@type='Directory' or key('objectID',//maec:Affected_Object/maec:Object_Reference/@object_id)/@type='Pipe'">
             <div id="fileObjHeader" style="cursor: pointer;" onclick="toggleDiv('fileObjContent', 'fileObjSpan')">
-                <span id="fileObjSpan" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> <b>Affected File System Objects</b>
+                 <b>Affected File System Objects</b>
             </div>
             <div id="fileObjContent" style="overflow:hidden; display:block;">
                 <TABLE class="grid tablesorter" cellspacing="0" style="width: auto;">
@@ -1574,7 +1556,7 @@ me@andrewmichaelsmith.com
     <xsl:template name="processRegistryObjects">
         <xsl:if test="key('objectID',//maec:Affected_Object/maec:Object_Reference/@object_id)/@type='Key/Key Group'">
             <div id="regObjHeader" style="cursor: pointer;" onclick="toggleDiv('regObjContent', 'regObjSpan')">
-                <span id="regObjSpan" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> <b>Affected Registry Objects</b>
+                 <b>Affected Registry Objects</b>
             </div>
             <div id="regObjContent" style="overflow:hidden; display:block;">
               <TABLE class="grid tablesorter" cellspacing="0" style="width: auto;">
@@ -1621,7 +1603,7 @@ me@andrewmichaelsmith.com
     <xsl:template name="processNetworkObjects">
         <xsl:if test="key('objectID',//maec:Affected_Object/maec:Object_Reference/@object_id)/@type='Socket'">
             <div id="netObjHeader" style="cursor: pointer;" onclick="toggleDiv('netObjContent', 'netObjSpan')">
-                <span id="netObjSpan" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> <b>Affected Network Objects</b>
+                 <b>Affected Network Objects</b>
             </div>
             <div id="netObjContent" style="overflow:hidden; display:block;">
                 <TABLE class="grid tablesorter" cellspacing="0" style="width: auto;">
@@ -1668,7 +1650,7 @@ me@andrewmichaelsmith.com
     <xsl:template name="processServiceObjects">
         <xsl:if test="key('objectID',//maec:Affected_Object/maec:Object_Reference/@object_id)/@type='Service/Daemon'">
             <div id="servObjHeader" style="cursor: pointer;" onclick="toggleDiv('servObjContent', 'servObjSpan')">
-                <span id="servObjSpan" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span>  <b>Affected Service/Daemon Objects</b>
+                  <b>Affected Service/Daemon Objects</b>
             </div>
             <div id="servObjContent" style="overflow:hidden; display:block;">
                  <TABLE class="grid tablesorter" cellspacing="0" style="width: auto;">
@@ -1715,7 +1697,7 @@ me@andrewmichaelsmith.com
     <xsl:template name="processMemoryObjects">
         <xsl:if test="key('objectID',//maec:Affected_Object/maec:Object_Reference/@object_id)/@type='Heap' or key('objectID',//maec:Affected_Object/maec:Object_Reference/@object_id)/@type='Memory Page'">
             <div id="memObjHeader" style="cursor: pointer;" onclick="toggleDiv('memObjContent', 'memObjSpan')">
-                <span id="memObjSpan" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> <b>Affected Memory Objects</b>
+                 <b>Affected Memory Objects</b>
             </div>
             <div id="memObjContent" style="overflow:hidden; display:block;">
                 <TABLE class="grid tablesorter" cellspacing="0" style="width: auto;">
@@ -1761,7 +1743,7 @@ me@andrewmichaelsmith.com
     <xsl:template name="processInternetObjects">
         <xsl:if test="key('objectID',//maec:Affected_Object/maec:Object_Reference/@object_id)/@type='URL' or key('objectID',//maec:Affected_Object/maec:Object_Reference/@object_id)/@type='URI'">
             <div id="intObjHeader" style="cursor: pointer;" onclick="toggleDiv('intObjContent', 'intObjSpan')">
-                <span id="intObjSpan" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> <b>Affected Internet Objects</b>
+                 <b>Affected Internet Objects</b>
             </div>
             <div id="intObjContent" style="overflow:hidden; display:block;">
                 <TABLE class="grid tablesorter" cellspacing="0" style="width: auto;">
@@ -1809,7 +1791,7 @@ me@andrewmichaelsmith.com
     <xsl:template name="processModuleObjects">
         <xsl:if test="key('objectID',//maec:Affected_Object/maec:Object_Reference/@object_id)/@type='Library'">
             <div id="modObjHeader" style="cursor: pointer;" onclick="toggleDiv('modObjContent', 'modObjSpan')">
-                <span id="modObjSpan" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> <b>Affected Module Objects</b>
+                 <b>Affected Module Objects</b>
             </div>
             <div id="modObjContent" style="overflow:hidden; display:block;">
                 <TABLE class="grid tablesorter" cellspacing="0" style="width: auto;">
@@ -1857,7 +1839,7 @@ me@andrewmichaelsmith.com
     <xsl:template name="processProcessObjects">
         <xsl:if test="key('objectID',//maec:Affected_Object/maec:Object_Reference/@object_id)/@type='Process'">
             <div id="procObjHeader" style="cursor: pointer;" onclick="toggleDiv('procObjContent', 'procObjSpan')">
-                <span id="procObjSpan" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> <b>Affected Process Objects</b>
+                 <b>Affected Process Objects</b>
             </div>
             <div id="procObjContent" style="overflow:hidden; display:block;">
                 <TABLE class="grid tablesorter" cellspacing="0" style="width: auto;">
@@ -1904,7 +1886,7 @@ me@andrewmichaelsmith.com
     <xsl:template name="processIPCObjects">
         <xsl:if test="key('objectID',//maec:Affected_Object/maec:Object_Reference/@object_id)/@type='Mutex' or key('objectID',//maec:Affected_Object/maec:Object_Reference/@object_id)/@type='Thread' or key('objectID',//maec:Affected_Object/maec:Object_Reference/@object_id)/@type='Event'">
             <div id="ipcObjHeader" style="cursor: pointer;" onclick="toggleDiv('ipcObjContent', 'ipcObjSpan')">
-                <span id="ipcObjSpan" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> <b>Affected IPC Objects</b>
+                 <b>Affected IPC Objects</b>
             </div>
             <div id="ipcObjContent" style="overflow:hidden; display:block;">
                 <TABLE class="grid tablesorter" cellspacing="0" style="width: auto;">
@@ -1951,7 +1933,7 @@ me@andrewmichaelsmith.com
     <xsl:template name="processGUIObjects">
         <xsl:if test="key('objectID',//maec:Affected_Object/maec:Object_Reference/@object_id)/@type='Window' or key('objectID',//maec:Affected_Object/maec:Object_Reference/@object_id)/@type='Dialog'">
             <div id="guiObjHeader" style="cursor: pointer;" onclick="toggleDiv('guiObjContent', 'guiObjSpan')">
-                <span id="guiObjSpan" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> <b>Affected GUI Objects</b>
+                 <b>Affected GUI Objects</b>
             </div>
             <div id="guiObjContent" style="overflow:hidden; display:block;">
                 <TABLE class="grid tablesorter" cellspacing="0" style="width: auto;">
@@ -2001,7 +1983,7 @@ me@andrewmichaelsmith.com
                 <xsl:variable name="contentVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
                 <xsl:variable name="imgVar" select="generate-id()"/>
                 <div id="fileObjAtt" style="cursor: pointer;" onclick="toggleDiv('{$contentVar}','{$imgVar}')">
-                    <span id="{$imgVar}" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> <xsl:value-of select="key('objectID',maec:Object_Reference/@object_id)/@type"/>
+                     <xsl:value-of select="key('objectID',maec:Object_Reference/@object_id)/@type"/>
                 </div>
                 <div id="{$contentVar}" style="overflow:hidden; display:block; padding:0px 7px;">
                     <xsl:for-each select="key('objectID',maec:Object_Reference/@object_id)">
@@ -2039,7 +2021,7 @@ me@andrewmichaelsmith.com
                 <xsl:variable name="contentVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
                 <xsl:variable name="imgVar" select="generate-id()"/>
                 <div id="fileObjAtt" style="cursor: pointer;" onclick="toggleDiv('{$contentVar}','{$imgVar}')">
-                    <span id="{$imgVar}" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> <xsl:value-of select="key('objectID',maec:Object_Reference/@object_id)/@type"/>
+                     <xsl:value-of select="key('objectID',maec:Object_Reference/@object_id)/@type"/>
                 </div>
                 <div id="{$contentVar}" style="overflow:hidden; display:block; padding:0px 7px;">
                     <xsl:for-each select="key('objectID',maec:Object_Reference/@object_id)">
@@ -2077,7 +2059,7 @@ me@andrewmichaelsmith.com
                 <xsl:variable name="contentVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
                 <xsl:variable name="imgVar" select="generate-id()"/>
                 <div id="fileObjAtt" style="cursor: pointer;" onclick="toggleDiv('{$contentVar}','{$imgVar}')">
-                    <span id="{$imgVar}" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> <xsl:value-of select="@type"/>
+                     <xsl:value-of select="@type"/>
                 </div>
                 <div id="{$contentVar}" style="overflow:hidden; display:block; padding:0px 7px;">
                     <xsl:call-template name="processObjectFull"/><br/>
@@ -2102,7 +2084,7 @@ me@andrewmichaelsmith.com
                 <xsl:variable name="contentVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
                 <xsl:variable name="imgVar" select="generate-id()"/>
                 <div id="fileObjAtt" style="cursor: pointer;" onclick="toggleDiv('{$contentVar}','{$imgVar}')">
-                    <span id="{$imgVar}" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> <xsl:value-of select="@type"/>
+                     <xsl:value-of select="@type"/>
                 </div>
                 <div id="{$contentVar}" style="overflow:hidden; display:block; padding:0px 7px;">
                         <xsl:call-template name="processObjectFull"/><br/>
@@ -2226,7 +2208,7 @@ me@andrewmichaelsmith.com
                 <xsl:variable name="contentVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
                 <xsl:variable name="imgVar" select="generate-id()"/>
                 <div id="classifications" style="cursor: pointer;" onclick="toggleDiv('{$contentVar}','{$imgVar}')">
-                    <span id="{$imgVar}" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> AV Classifications
+                     AV Classifications
                 </div>
                 <div id="{$contentVar}" style="overflow:hidden; display:block; padding:0px 7px;">
                     <table id="one-column-emphasis">
@@ -2249,7 +2231,7 @@ me@andrewmichaelsmith.com
                 <xsl:variable name="contentVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
                 <xsl:variable name="imgVar" select="generate-id()"/>
                 <div id="associatedCode" style="cursor: pointer;" onclick="toggleDiv('{$contentVar}','{$imgVar}')">
-                    <span id="{$imgVar}" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> Associated Code
+                     Associated Code
                 </div>
                 <div id="{$contentVar}" style="overflow:hidden; display:block; padding:0px 7px;">
                     <xsl:call-template name="processAssociatedCode"/>
@@ -2297,7 +2279,7 @@ me@andrewmichaelsmith.com
                 <xsl:variable name="contentVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
                 <xsl:variable name="imgVar" select="generate-id()"/>
                 <div id="fileObjAtt" style="cursor: pointer;" onclick="toggleDiv('{$contentVar}','{$imgVar}')">
-                    <span id="{$imgVar}" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> File Object Attributes
+                     File Object Attributes
                 </div>
                 <div id="{$contentVar}" style="overflow:hidden; display:block; padding:0px 7px;">
                     <br/>
@@ -2311,7 +2293,7 @@ me@andrewmichaelsmith.com
                 <xsl:variable name="contentVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
                 <xsl:variable name="imgVar" select="generate-id()"/>
                 <div id="guiObjAtt" style="cursor: pointer;" onclick="toggleDiv('{$contentVar}', '{$imgVar}')">
-                    <span id="{$imgVar}" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> GUI Object Attributes
+                     GUI Object Attributes
                 </div>
                 <div id="{$contentVar}" style="overflow:hidden; display:block; padding:0px 7px;">
                     <br/>
@@ -2325,7 +2307,7 @@ me@andrewmichaelsmith.com
                 <xsl:variable name="contentVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
                 <xsl:variable name="imgVar" select="generate-id()"/>
                 <div id="ipcObjAtt" style="cursor: pointer;" onclick="toggleDiv('{$contentVar}','{$imgVar}')">
-                    <span id="{$imgVar}" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> IPC Object Attributes
+                     IPC Object Attributes
                 </div>
                 <div id="{$contentVar}" style="overflow:hidden; display:block; padding:0px 7px;">
                     <br/>
@@ -2339,7 +2321,7 @@ me@andrewmichaelsmith.com
                 <xsl:variable name="contentVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
                 <xsl:variable name="imgVar" select="generate-id()"/>
                 <div id="intObjAtt" style="cursor: pointer;" onclick="toggleDiv('{$contentVar}', '{$imgVar}')">
-                    <span id="{$imgVar}" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> Internet Object Attributes
+                     Internet Object Attributes
                 </div>
                 <div id="{$contentVar}" style="overflow:hidden; display:block; padding:0px 7px;">
                     <br/>
@@ -2353,7 +2335,7 @@ me@andrewmichaelsmith.com
                 <xsl:variable name="contentVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
                 <xsl:variable name="imgVar" select="generate-id()"/>
                 <div id="modObjAtt" style="cursor: pointer;" onclick="toggleDiv('{$contentVar}', '{$imgVar}')">
-                    <span id="{$imgVar}" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> Module Object Attributes
+                     Module Object Attributes
                 </div>
                 <div id="{$contentVar}" style="overflow:hidden; display:block; padding:0px 7px;">
                     <br/>
@@ -2367,7 +2349,7 @@ me@andrewmichaelsmith.com
                 <xsl:variable name="contentVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
                 <xsl:variable name="imgVar" select="generate-id()"/>
                 <div id="regObjAtt" style="cursor: pointer;" onclick="toggleDiv('{$contentVar}','{$imgVar}')">
-                    <span id="{$imgVar}" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> Registry Object Attributes
+                     Registry Object Attributes
                 </div>
                 <div id="{$contentVar}" style="overflow:hidden; display:block; padding:0px 20px;">
                     <br/>
@@ -2381,7 +2363,7 @@ me@andrewmichaelsmith.com
                 <xsl:variable name="contentVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
                 <xsl:variable name="imgVar" select="generate-id()"/>
                 <div id="procObjAtt" style="cursor: pointer;" onclick="toggleDiv('{$contentVar}','{$imgVar}')">
-                    <span id="{$imgVar}" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> Process Object Attributes
+                     Process Object Attributes
                 </div>
                 <div id="{$contentVar}" style="overflow:hidden; display:block; padding:0px 7px;">
                     <br/>
@@ -2395,7 +2377,7 @@ me@andrewmichaelsmith.com
                 <xsl:variable name="contentVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
                 <xsl:variable name="imgVar" select="generate-id()"/>
                 <div id="memObjAtt" style="cursor: pointer;" onclick="toggleDiv('{$contentVar}','{$imgVar}')">
-                    <span id="{$imgVar}" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> Memory Object Attributes
+                     Memory Object Attributes
                 </div>
                 <div id="{$contentVar}" style="overflow:hidden; display:block; padding:0px 7px;">
                     <br/>
@@ -2409,7 +2391,7 @@ me@andrewmichaelsmith.com
                 <xsl:variable name="contentVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
                 <xsl:variable name="imgVar" select="generate-id()"/>
                 <div id="netObjAtt" style="cursor: pointer;" onclick="toggleDiv('{$contentVar}','{$imgVar}')">
-                    <span id="{$imgVar}" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> Network Object Attributes
+                     Network Object Attributes
                 </div>
                 <div id="{$contentVar}" style="overflow:hidden; display:block; padding:0px 7px;">
                     <br/>
@@ -2423,7 +2405,7 @@ me@andrewmichaelsmith.com
                 <xsl:variable name="contentVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
                 <xsl:variable name="imgVar" select="generate-id()"/>
                 <div id="servObjAtt" style="cursor: pointer;" onclick="toggleDiv('{$contentVar}','{$imgVar}')">
-                    <span id="{$imgVar}" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> Service Object Attributes
+                     Service Object Attributes
                 </div>
                 <div id="{$contentVar}" style="overflow:hidden; display:block; padding:0px 7px;">
                     <br/>
@@ -2437,7 +2419,7 @@ me@andrewmichaelsmith.com
                 <xsl:variable name="contentVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
                 <xsl:variable name="imgVar" select="generate-id()"/>
                 <div id="custObjAtt" style="cursor: pointer;" onclick="toggleDiv('{$contentVar}','{$imgVar}')">
-                    <span id="{$imgVar}" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> Custom Object Attributes
+                     Custom Object Attributes
                 </div>
                 <div id="{$contentVar}" style="overflow:hidden; display:block; padding:0px 7px;">
                     <br/>
@@ -2452,7 +2434,7 @@ me@andrewmichaelsmith.com
                 <xsl:variable name="contentVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
                 <xsl:variable name="imgVar" select="generate-id()"/>
                 <div id="classifications" style="cursor: pointer;" onclick="toggleDiv('{$contentVar}','{$imgVar}')">
-                    <span id="{$imgVar}" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> AV Classifications
+                     AV Classifications
                 </div>
                 <div id="{$contentVar}" style="overflow:hidden; display:block; padding:0px 7px;">
                     <table id="one-column-emphasis">
@@ -2475,7 +2457,7 @@ me@andrewmichaelsmith.com
                 <xsl:variable name="contentVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
                 <xsl:variable name="imgVar" select="generate-id()"/>
                 <div id="associatedCode" style="cursor: pointer;" onclick="toggleDiv('{$contentVar}','{$imgVar}')">
-                    <span id="{$imgVar}" style="font-weight:bold; margin:5px; color:#BD9C8C;">-</span> Associated Code
+                     Associated Code
                 </div>
                 <div id="{$contentVar}" style="overflow:hidden; display:block; padding:0px 7px;">
                     <xsl:call-template name="processAssociatedCode"/>
