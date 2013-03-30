@@ -198,11 +198,13 @@ me@andrewmichaelsmith.com
             <xsl:for-each select="//maec:Behaviors/maec:Behavior">
                
                <xsl:if test="maec:Description">
-                    <xsl:for-each select="maec:Description">
-                        <xsl:for-each select="maec:Text">
-                            <p><b><xsl:value-of select="."/></b></p>
+                    <ol>
+                        <xsl:for-each select="maec:Description">
+                            <xsl:for-each select="maec:Text">
+                                <li><xsl:value-of select="."/></li>
+                            </xsl:for-each>
                         </xsl:for-each>
-                    </xsl:for-each>
+                    </ol>
                </xsl:if>
                <xsl:if test="maec:Purpose">
                 <ul>
