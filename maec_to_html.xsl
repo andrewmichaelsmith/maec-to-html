@@ -196,15 +196,15 @@ me@andrewmichaelsmith.com
     
     <xsl:template name="processBehaviors">
             <xsl:for-each select="//maec:Behaviors/maec:Behavior">
-               
+               <ol>
                <xsl:if test="maec:Description">
-                    <ol>
+                    
                         <xsl:for-each select="maec:Description">
                             <xsl:for-each select="maec:Text">
                                 <li><xsl:value-of select="."/></li>
                             </xsl:for-each>
                         </xsl:for-each>
-                    </ol>
+
                </xsl:if>
                <xsl:if test="maec:Purpose">
                 <ul>
@@ -223,6 +223,7 @@ me@andrewmichaelsmith.com
                    </xsl:for-each>
                 </ul>
                </xsl:if>
+               </ol>
         </xsl:for-each>
     </xsl:template>
 
