@@ -1968,7 +1968,9 @@ me@andrewmichaelsmith.com
     </xsl:template>
     
     <xsl:template name="processObjectFull">
-        <div id="object_label"><xsl:value-of select="@type"/> Object</div>
+     
+
+	   <div id="object_label"><xsl:value-of select="@type"/> Object</div>
         <div id="container">
             <table id="one-column-emphasis">
                 <colgroup>
@@ -2105,9 +2107,13 @@ me@andrewmichaelsmith.com
     </xsl:template>
     
     <xsl:template name="processObject">
-        <div id="object_label"><xsl:value-of select="@type"/> Object</div>
+ 	<h4>
+	    <xsl:value-of select="@type"/> Object: <xsl:value-of select="@object_name"/>
+	</h4>
+    
+   <!--<div id="object_label"><xsl:value-of select="@type"/> Object</div>-->
         <div id="container">
-            <table id="one-column-emphasis">
+         <!--   <table id="one-column-emphasis">
                 <colgroup>
                     <col class="oce-first" />
                 </colgroup>
@@ -2138,7 +2144,7 @@ me@andrewmichaelsmith.com
                         </xsl:choose>       
                 </tbody>
             </table> <br/>
-            
+            -->
             <xsl:if test="maec:File_System_Object_Attributes">
                 <xsl:variable name="contentVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
                 <xsl:variable name="imgVar" select="generate-id()"/>
@@ -2184,9 +2190,9 @@ me@andrewmichaelsmith.com
             <xsl:if test="maec:Internet_Object_Attributes">
                 <xsl:variable name="contentVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
                 <xsl:variable name="imgVar" select="generate-id()"/>
-                <div id="intObjAtt"  >
+                <!--<div id="intObjAtt"  >
                      Internet Object Attributes
-                </div>
+                </div>-->
                 <div id="{$contentVar}" style="overflow:hidden; display:block; padding:0px 7px;">
                     <br/>
                     <xsl:for-each select="maec:Internet_Object_Attributes">
@@ -2320,9 +2326,9 @@ me@andrewmichaelsmith.com
             <xsl:for-each select="maec:Associated_Code">
                 <xsl:variable name="contentVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
                 <xsl:variable name="imgVar" select="generate-id()"/>
-                <div id="associatedCode"  >
+                <!--<div id="associatedCode"  >
                      Associated Code
-                </div>
+                </div>-->
                 <div id="{$contentVar}" style="overflow:hidden; display:block; padding:0px 7px;">
                     <xsl:call-template name="processAssociatedCode"/>
                 </div>
@@ -3515,7 +3521,7 @@ me@andrewmichaelsmith.com
     </xsl:template>
     
     <xsl:template name="processInternetObjectAttributes">
-        <table id="one-column-emphasis">
+     <!--   <table id="one-column-emphasis">
             <colgroup>
                 <col class="oce-first" />
             </colgroup>
@@ -3523,7 +3529,7 @@ me@andrewmichaelsmith.com
                 <xsl:if test="maec:URI">
                     <tr>
                         <td>URL</td>
-                        <td><xsl:value-of select="maec:URI/metadata:uriString"/></td>
+                        <td><xsl:value-of select="."/></td>
                     </tr>
                 </xsl:if>
                 <xsl:if test="maec:AS_Number">
@@ -3533,7 +3539,7 @@ me@andrewmichaelsmith.com
                     </tr>
                 </xsl:if>
             </tbody>
-        </table> <br/>
+        </table> <br/>-->
     </xsl:template>
     
     <xsl:template name="processModuleObjectAttributes">
@@ -3906,62 +3912,22 @@ me@andrewmichaelsmith.com
     </xsl:template>
     
     <xsl:template name="processAssociatedCode">
-        <xsl:for-each select="maec:Associated_Code_Snippet">
-            <b>Associated Code Snippet</b>
-            <table id="hor-minimalist-a">
-                <thead>
-                    <tr>
-                        <th scope="col">Code Type</th>
-                        <th scope="col">Language</th>
-                        <th scope="col">Start Address</th>
-                        <th scope="col">Processor Family</th>
-                        <th scope="col">XOR Pattern</th>
-                    </tr>
-                    <xsl:choose>
-                        <xsl:when test="maec:Code_Snippet/@codetype">
-                            <td><xsl:value-of select="maec:Code_Snippet/@codetype"/></td>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <td>N/A</td>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                    <xsl:choose>
-                        <xsl:when test="maec:Code_Snippet/@language">
-                            <td><xsl:value-of select="maec:Code_Snippet/@language"/></td>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <td>N/A</td>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                    <xsl:choose>
-                        <xsl:when test="maec:Code_Snippet/@start_address">
-                            <td><xsl:value-of select="maec:Code_Snippet/@start_address"/></td>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <td>N/A</td>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                    <xsl:choose>
-                        <xsl:when test="maec:Code_Snippet/@processor_family">
-                            <td><xsl:value-of select="maec:Code_Snippet/@processor_family"/></td>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <td>N/A</td>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                    <xsl:choose>
-                        <xsl:when test="maec:Code_Snippet/@xor_pattern">
-                            <td><xsl:value-of select="maec:Code_Snippet/@xor_pattern"/></td>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <td>N/A</td>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </thead>
-            </table> <br/>
-            <xsl:if test="maec:Nature_Of_Relationship">
+       	 <b>Associated Code</b>
+	 <xsl:for-each select="maec:Associated_Code_Snippet">
+         <p>Code <xsl:value-of select="maec:Code_Snippet/@id"/></p> 
+	 <p>Language:
+	  <xsl:choose>
+	      <xsl:when test="maec:Code_Snippet/@language">	
+	    	<xsl:value-of select="maec:Code_Snippet/@language"/>
+	      </xsl:when>
+              <xsl:otherwise>
+	      N/A
+              </xsl:otherwise>
+          </xsl:choose>
+	  </p>
+            <!--<xsl:if test="maec:Nature_Of_Relationship">
                 <xsl:value-of select="maec:Nature_Of_Relationship"/>
-            </xsl:if>
+            </xsl:if>-->
             <xsl:if test="maec:Code_Snippet/maec:Code_Segment">
                 <div id="inner_container">
                      <code class="prettyprint">
